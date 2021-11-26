@@ -18,6 +18,6 @@ jobs:
       with:
         go-version: 1.17
     - name: Dependencies
-      run: go mod download
+      run: ls -la
     - name: Test
       run: go test -v ./...
