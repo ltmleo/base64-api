@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+            
+    - uses: docker/login-action@v1
+      name: Login to Docker Hub  
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
+    - name: Push the Docker image
+      run: docker push leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
