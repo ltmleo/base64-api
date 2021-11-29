@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   workflow_run:
-    workflows: docker-image
+    workflows: Docker Image CI
 
 jobs:
   build:
