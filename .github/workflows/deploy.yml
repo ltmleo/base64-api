@@ -15,4 +15,4 @@ jobs:
           heroku_app_name: "simple-base64-api"
           heroku_email: "${{secrets.HEROKU_EMAIL}}"
           justlogin: true
-       - run: heroku container:release leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
+      - run: heroku container:release leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
