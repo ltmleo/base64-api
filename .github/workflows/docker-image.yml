@@ -2,7 +2,9 @@ name: Docker Image CI
 
 on:
   workflow_run:
-    workflows: go
+    workflows: ["Golang CI"]
+    types:
+      - completed
 
 jobs:
 

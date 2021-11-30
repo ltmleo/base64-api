@@ -1,4 +1,4 @@
-VERSION=latest
+VERSION=${VERSION-latest}
 
 install:
 	go mod download
