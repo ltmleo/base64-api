@@ -2,7 +2,9 @@
 
 set -e
 
-API_URL=$1
+API_URL="http://$1"
+
+echo "Wating 404 in $API_URL"
 
 for i in $(seq 10); do
     echo "Running test $i"
