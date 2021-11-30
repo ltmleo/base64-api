@@ -1,4 +1,11 @@
 terraform {
+  backend "remote" {
+    organization = "aws-testes"
+    workspaces {
+      name = "base64-api"
+    }
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
