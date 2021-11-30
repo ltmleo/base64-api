@@ -18,7 +18,9 @@ func main() {
 	log.Info("Setting method GET /encode")                                           
 	apiRouter.PathPrefix("/encode").HandlerFunc(GetEncode).Methods("GET")
 	log.Info("Setting method GET /decode")
-	apiRouter.PathPrefix("/decode").HandlerFunc(GetDecode).Methods("GET") 
+	apiRouter.PathPrefix("/decode").HandlerFunc(GetDecode).Methods("GET")
+	log.Info("Setting method GET /healthcheck")
+	apiRouter.PathPrefix("/healthcheck").HandlerFunc(GetHealthCheck).Methods("GET") 
 	log.Info("Server is running on " + host + ":" + port)                          
 	http.ListenAndServe(host+":"+port, router)
 }
@@ -31,6 +33,11 @@ func GetEncode(w http.ResponseWriter, r *http.Request) {
 	log.Debug("Response: " + string(response))
 	w.WriteHeader(http.StatusOK)
 	w.Write(response)
+}
+
+func GetHealthCheck(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("OK"))
 }
 
 func GetDecode(w http.ResponseWriter, r *http.Request) {
