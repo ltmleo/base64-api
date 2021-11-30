@@ -1,4 +1,5 @@
 VERSION=${VERSION-latest}
+API_URL := $(shell terraform -chdir=infra/ output --raw load_balancer_ip)
 
 install:
 	go mod download
@@ -21,3 +22,8 @@ tfApply:
 tfDestroy:
 	terraform -chdir=infra/ destroy -var app_version="${VERSION}"
 tf: tfInit tfCheck tfPlan
+tfOut: 
+	@echo "http://${API_URL}/api/encode/string=teste"
+	@echo "http://${API_URL}/api/decode/string=dGVzdGU="
+testInfra:
+	./test_infra.sh ${API_URL}

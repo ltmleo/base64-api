@@ -43,3 +43,6 @@ jobs:
 
     - name: Terraform Apply
       run: terraform -chdir=infra apply -auto-approve -var app_version="latest"
+
+    - name: Test Infra (Wait 404)
+      run: ./test_infra.sh $(terraform -chdir=infra/ output --raw load_balancer_ip)
