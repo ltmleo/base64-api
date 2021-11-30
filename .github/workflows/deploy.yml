@@ -48,9 +48,9 @@ jobs:
     - name: Get API_URL endpoint
       run: echo "API_URL=$(terraform -chdir=infra/ output --raw load_balancer_ip)" >> $GITHUB_ENV
     
-    - name: Wait 404
+    - name: API Health Check
       continue-on-error: true
-      run: bash ./test_infra.sh ${API_URL}
+      run: ./test_infra.sh ${API_URL}
     
     - name: Terraform Destroy in Job Failure Case
       if: ${{ job.status == 'failure' }}
