@@ -20,3 +20,5 @@ for i in $(seq 100); do
     fi
     sleep 2
 done
+
+exit 1
