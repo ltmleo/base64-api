@@ -2,7 +2,10 @@
 
 set -e
 
-[ $1 -n ] && echo "Missing API URL" && exit 1
+if [ ! -n "$1" ]; then
+    echo "Missing API URL"
+    exit 1
+fi
 
 API_URL="http://$1"
 
