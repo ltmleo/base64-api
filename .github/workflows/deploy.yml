@@ -40,5 +40,4 @@ jobs:
       run: terraform -chdir=infra plan
 
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform -chdir=infra apply -auto-approve -var app_version="1.0.${GITHUB_RUN_NUMBER}"
