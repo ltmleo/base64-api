@@ -50,3 +50,7 @@ jobs:
     
     - name: Wait 404
       run: bash ./test_infra.sh ${API_URL}
+    
+    - name: Terraform Destroy in Job Failure Case
+      if: ${{ job.status == 'failure' }}
+      run: terraform -chdir=infra destroy -auto-approve -var app_version="latest"
