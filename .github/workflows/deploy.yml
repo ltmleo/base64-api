@@ -5,14 +5,36 @@ on:
     workflows: Docker Image CI
 
 jobs:
-  build:
+
+  terraform:
+    name: 'Terraform'
     runs-on: ubuntu-latest
+    environment: dev
+
+    defaults:
+      run:
+        shell: bash
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "simple-base64-api"
-          heroku_email: "${{secrets.HEROKU_EMAIL}}"
-          justlogin: true
-      - run: heroku container:release leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-1
+  
+    - name: Terraform Init
+      run: terraform -chdir=infra init
+      
+    - name: Terraform Format
+      run: terraform -chdir=infra fmt -check
+
+    - name: Terraform Plan
+      run: terraform -chdir=infra plan
+
+    # - name: Terraform Apply
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: terraform -chdir=infra apply -auto-approve -var app_version="1.0.${GITHUB_RUN_NUMBER}"

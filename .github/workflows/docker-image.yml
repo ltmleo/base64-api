@@ -21,4 +21,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
     - name: Push the Docker image
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: docker push leonardomontero/base64-api:1.0.${GITHUB_RUN_NUMBER}
