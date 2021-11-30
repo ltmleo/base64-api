@@ -49,4 +49,4 @@ jobs:
       run: echo "API_URL=$(terraform -chdir=infra/ output --raw load_balancer_ip)" >> $GITHUB_ENV
     
     - name: Wait 404
-      run: bash ./test_infra ${API_URL}
+      run: bash ./test_infra.sh ${API_URL}

@@ -2,6 +2,8 @@
 
 set -e
 
+[ $1 -n ] && echo "Missing API URL" && exit 1
+
 API_URL="http://$1"
 
 echo "Wating 404 in $API_URL"
