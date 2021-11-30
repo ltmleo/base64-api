@@ -49,4 +49,4 @@ jobs:
       run: echo "API_URL=$(terraform -chdir=infra/ output --raw load_balancer_ip)" >> $GITHUB_ENV
     
     - name: API Health Check
-      run: ./test_infra.sh ${API_URL} || terraform -chdir=infra destroy -auto-approve -var app_version="latest"
+      run: ./test_infra.sh ${API_URL} || (terraform -chdir=infra destroy -auto-approve -var app_version="latest" && exit 1)
