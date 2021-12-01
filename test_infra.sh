@@ -7,7 +7,7 @@ if [ ! -n "$1" ]; then
     exit 1
 fi
 
-API_URL="http://$1/healthcheck"
+API_URL="http://$1/api/healthcheck"
 
 echo "Wating 200 in $API_URL for 200s"
 
