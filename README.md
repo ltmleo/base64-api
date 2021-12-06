@@ -72,5 +72,3 @@ The pipeline, exectue the unit tests, build the docker container, publish it to 
 - Execute e2e test and promove package to "production";
 - Integrate with another tools, like, sonar, clod watch, and etc;
 - Improve documentation;
-  
-
